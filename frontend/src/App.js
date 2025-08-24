@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useRef, useState } from "react";
+import LandingPage from "./components/LandingPage";
+import VoiceAssistant from "./components/VoiceAssistant";
 
-function App() {
+export default function App() {
+  const containerRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const sections = [<LandingPage />, <VoiceAssistant />];
+
+  useEffect(() => {
+    const handleWheel = (e) => {
+      e.preventDefault();
+
+      if (e.deltaY > 0 && currentIndex < sections.length - 1) {
+        // scroll down
+        setCurrentIndex((prev) => prev + 1);
+      } else if (e.deltaY < 0 && currentIndex > 0) {
+        // scroll up
+        setCurrentIndex((prev) => prev - 1);
+      }
+    };
+
+    const node = containerRef.current;
+    node.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => node.removeEventListener("wheel", handleWheel);
+  }, [currentIndex, sections.length]);
+
+  useEffect(() => {
+    const node = containerRef.current.children[currentIndex];
+    node.scrollIntoView({ behavior: "smooth" });
+  }, [currentIndex]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div ref={containerRef} className="h-screen w-screen overflow-hidden">
+      {sections.map((Section, idx) => (
+        <div key={idx} className="h-screen w-screen">
+          {Section}
+        </div>
+      ))}
     </div>
   );
 }
-
-export default App;
