@@ -13,7 +13,7 @@ export const fetchMurf = async (text) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ text }),
   });
-  console.log("Murf fetch status:", res.status, res.headers.get("content-type"));
+  
 
   if (!res.ok) throw new Error("Failed to fetch Murf audio");
 
