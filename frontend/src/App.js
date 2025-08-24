@@ -5,17 +5,20 @@ import VoiceAssistant from "./components/VoiceAssistant";
 export default function App() {
   const containerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const sections = [<LandingPage />, <VoiceAssistant />];
+
+  // sections as functions instead of JSX, so we can pass props
+  const sections = [
+    <LandingPage goToVoiceAssistant={() => setCurrentIndex(1)} />,
+    <VoiceAssistant />,
+  ];
 
   useEffect(() => {
     const handleWheel = (e) => {
       e.preventDefault();
 
       if (e.deltaY > 0 && currentIndex < sections.length - 1) {
-        // scroll down
         setCurrentIndex((prev) => prev + 1);
       } else if (e.deltaY < 0 && currentIndex > 0) {
-        // scroll up
         setCurrentIndex((prev) => prev - 1);
       }
     };

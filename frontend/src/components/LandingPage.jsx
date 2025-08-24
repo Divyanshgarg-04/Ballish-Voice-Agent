@@ -1,4 +1,4 @@
-export default function LandingPage() {
+export default function LandingPage({ goToVoiceAssistant }) {
   return (
     <div className="flex flex-col items-center justify-center h-screen 
       bg-gradient-to-br from-purple-500 via-indigo-600 to-blue-700 text-white">
@@ -16,6 +16,7 @@ export default function LandingPage() {
       </div>
 
       <button
+        onClick={goToVoiceAssistant}   // 🔥 added here
         className="mt-12 px-8 py-4 rounded-2xl text-lg font-semibold 
           bg-yellow-400 text-black shadow-xl 
           hover:bg-yellow-300 hover:scale-105 transition-all duration-300 ease-in-out"

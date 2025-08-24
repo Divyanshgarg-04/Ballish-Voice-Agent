@@ -52,7 +52,6 @@ export default function VoiceAssistant() {
             ...prev,
             { role: "user", text: transcript },
           ]);
-
           // Fetch from Gemini
           const geminiRes = await fetchGemini(transcript);
           const replyText =
