@@ -1,5 +1,5 @@
 export const fetchGemini = async (query) => {
-  const res = await fetch("http://localhost:5000/gemini", {
+  const res = await fetch("http://localhost:5000/api/ai/query", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query }),
@@ -8,10 +8,14 @@ export const fetchGemini = async (query) => {
 };
 
 export const fetchMurf = async (text) => {
-  const res = await fetch("http://localhost:5000/murf", {
+  const res = await fetch("http://localhost:5000/api/murf/speech", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ text }),
   });
-  return res.blob();
+  console.log("Murf fetch status:", res.status, res.headers.get("content-type"));
+
+  if (!res.ok) throw new Error("Failed to fetch Murf audio");
+
+  return await res.blob(); // return audio blob
 };

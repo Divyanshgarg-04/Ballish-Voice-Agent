@@ -55,7 +55,7 @@ export default function VoiceAssistant() {
           // Fetch from Gemini
           const geminiRes = await fetchGemini(transcript);
           const replyText =
-            geminiRes?.candidates?.[0]?.content?.parts?.[0]?.text ||
+            geminiRes?.response ||
             "I didn't understand that.";
 
           // Show assistant reply
