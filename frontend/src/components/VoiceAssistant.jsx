@@ -148,9 +148,9 @@ export default function VoiceAssistant() {
         <button
           onClick={listening ? stopListening : startListening}
           className={`w-20 h-20 flex items-center justify-center rounded-full shadow-2xl transition-all duration-300 
-            ${listening ? "bg-red-500 animate-pulse" : "bg-green-500 hover:bg-green-400"}`}
+            ${listening ? "bg-green-500 hover:bg-green-400" : "bg-red-500 animate-pulse"}`}
         >
-          {listening ? <MicOff size={36} /> : <Mic size={36} />}
+          {listening ? <Mic size={36} /> : <MicOff size={36} />}
         </button>
       </div>
     </div>
