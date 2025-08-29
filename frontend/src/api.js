@@ -1,5 +1,7 @@
+const Backend_URL = process.env.REACT_APP_BACKEND_URL;
+
 export const fetchGemini = async (query) => {
-  const res = await fetch("http://localhost:5000/api/ai/query", {
+  const res = await fetch(`${Backend_URL}/api/ai/query`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query }),
@@ -8,7 +10,7 @@ export const fetchGemini = async (query) => {
 };
 
 export const fetchMurf = async (text) => {
-  const res = await fetch("http://localhost:5000/api/murf/speech", {
+  const res = await fetch(`${Backend_URL}/api/murf/speech`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ text }),
